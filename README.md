@@ -31,8 +31,8 @@ docker run -d \
 | `PORT` | `80` | Target application port |
 | `ENDPOINT` | `/health` | Health check endpoint |
 | `CONTAINER_NAME` | `app` | Name of container to restart |
-| `CHECK_INTERVAL` | `30` | Seconds between health checks |
-| `TIMEOUT` | `10` | HTTP request timeout (seconds) |
+| `CHECK_INTERVAL` | `150` | Seconds between health checks |
+| `TIMEOUT` | `30` | HTTP request timeout (seconds) |
 | `MAX_ATTEMPTS` | `3` | Failed checks before restart |
 | `COOLDOWN` | `300` | Seconds between restarts (5 min) |
 
