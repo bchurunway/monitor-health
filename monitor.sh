@@ -1,22 +1,23 @@
 #!/bin/bash
-# Simple Health Monitor
+# monitor.sh - Simple Health Monitor
 
 # Config from environment
 HOST="${HOST:-localhost}"
 PORT="${PORT:-80}"
 ENDPOINT="${ENDPOINT:-/health}"
 CONTAINER_NAME="${CONTAINER_NAME:-app}"
-CHECK_INTERVAL="${CHECK_INTERVAL:-150}"
+CHECK_INTERVAL="${CHECK_INTERVAL:-300}"
 TIMEOUT="${TIMEOUT:-30}"
 MAX_ATTEMPTS="${MAX_ATTEMPTS:-3}"
 COOLDOWN="${COOLDOWN:-300}"
 
-# State
+# State tracking
 LAST_RESTART=0
 RESTART_COUNT=0
 WINDOW_START=0
 FAILURES=0
 
+# Build URL
 URL="http://${HOST}:${PORT}${ENDPOINT}"
 
 echo "Monitoring: $URL -> Container: $CONTAINER_NAME"
@@ -61,9 +62,9 @@ restart_container() {
     fi
 }
 
-# Main loop
+# Main monitoring loop
 while true; do
-    if curl -f -s -m "$TIMEOUT" "$URL" >/dev/null; then
+    if curl -f -s -m "$TIMEOUT" "$URL" >/dev/null 2>&1; then
         # Health check passed
         FAILURES=0
     else
