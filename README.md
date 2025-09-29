@@ -70,6 +70,7 @@ docker run -d \
 ```
 
 ### Docker Compose
+You can also find a sample file in the repo.
 
 ```yaml
 version: '3.8'
